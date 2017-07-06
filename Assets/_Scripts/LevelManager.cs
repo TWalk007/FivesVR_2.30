@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
@@ -14,9 +12,7 @@ public class LevelManager : MonoBehaviour {
 		if (scene.name == "00_Splash") {
 			Invoke ("LoadNextScene", autoLoadNextLevelAfter);
 		}
-
 	}
-
 
 	public void LoadNextScene (){
 		int currentIndex =  UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
@@ -35,8 +31,8 @@ public class LevelManager : MonoBehaviour {
 
 	public void ResetScene (){
 		int currentIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
-		SceneManager.LoadScene (currentIndex);
-	}
+        SceneManager.LoadScene(currentIndex);
+    }
 
 	public void Quit()	{
 		Application.Quit ();
