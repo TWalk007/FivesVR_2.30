@@ -1,0 +1,160 @@
+fileFormatVersion: 2
+guid: 940c26999dbdb8948964f70abd6494d2
+timeCreated: 1499442872
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Box333
+    100002: Extension Arm Inner
+    100004: Extension Arm Main
+    100006: Extension Arm Spacer
+    100008: ICH Mount_01
+    100010: ICH_Back2
+    100012: ICH_Block
+    100014: ICH_Bracket
+    100016: ICH_MountMain
+    100018: ICH_MountMainBack
+    100020: //RootNode
+    100022: Plate
+    100024: Plate2
+    100026: SpindleTool
+    100028: Tool
+    100030: ToolBit
+    100032: ToolBit_01
+    400000: Box333
+    400002: Extension Arm Inner
+    400004: Extension Arm Main
+    400006: Extension Arm Spacer
+    400008: ICH Mount_01
+    400010: ICH_Back2
+    400012: ICH_Block
+    400014: ICH_Bracket
+    400016: ICH_MountMain
+    400018: ICH_MountMainBack
+    400020: //RootNode
+    400022: Plate
+    400024: Plate2
+    400026: SpindleTool
+    400028: Tool
+    400030: ToolBit
+    400032: ToolBit_01
+    2300000: Box333
+    2300002: Extension Arm Inner
+    2300004: Extension Arm Main
+    2300006: Extension Arm Spacer
+    2300008: ICH Mount_01
+    2300010: ICH_Back2
+    2300012: ICH_Block
+    2300014: ICH_Bracket
+    2300016: ICH_MountMain
+    2300018: ICH_MountMainBack
+    2300020: Plate
+    2300022: Plate2
+    2300024: SpindleTool
+    2300026: Tool
+    2300028: ToolBit
+    2300030: ToolBit_01
+    3300000: Box333
+    3300002: Extension Arm Inner
+    3300004: Extension Arm Main
+    3300006: Extension Arm Spacer
+    3300008: ICH Mount_01
+    3300010: ICH_Back2
+    3300012: ICH_Block
+    3300014: ICH_Bracket
+    3300016: ICH_MountMain
+    3300018: ICH_MountMainBack
+    3300020: Plate
+    3300022: Plate2
+    3300024: SpindleTool
+    3300026: Tool
+    3300028: ToolBit
+    3300030: ToolBit_01
+    4300000: ICH_Bracket
+    4300002: ICH_MountMain
+    4300004: ICH_Back2
+    4300006: Plate
+    4300008: Plate2
+    4300010: ICH Mount_01
+    4300012: ICH_MountMainBack
+    4300014: Extension Arm Inner
+    4300016: ToolBit_01
+    4300018: SpindleTool
+    4300020: Extension Arm Spacer
+    4300022: ToolBit
+    4300024: Tool
+    4300026: ICH_Block
+    4300028: Box333
+    4300030: Extension Arm Main
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
