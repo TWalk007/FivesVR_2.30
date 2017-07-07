@@ -19,6 +19,8 @@ ExportedObj/
 *.booproj
 *.svd
 
+# Directories to ignore:
+Meshes/*
 
 # Unity3D generated meta files
 *.pidb.meta

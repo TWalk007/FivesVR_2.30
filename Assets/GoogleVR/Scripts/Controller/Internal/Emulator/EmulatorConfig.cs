@@ -14,10 +14,17 @@
 
 using UnityEngine;
 
+
 /// @cond
 namespace Gvr.Internal {
   class EmulatorConfig : MonoBehaviour {
-    public static EmulatorConfig Instance {
+
+        void Awake()
+        {
+            DontDestroyOnLoad(transform.gameObject);
+        }
+
+        public static EmulatorConfig Instance {
       get {
         if (instance == null) {
           EmulatorConfig[] configs = (EmulatorConfig[]) FindObjectsOfType(typeof(EmulatorConfig));
