@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VR;
+using GVR;
 
 public class ExploreController : MonoBehaviour {
 
@@ -140,7 +141,9 @@ public class ExploreController : MonoBehaviour {
 		CreatePart ();
 		captionsCanvas.FadeCaptionsPanelToggle (arrayInt + 2);
 		StartCoroutine (SpindleAnimationDelay ());
-	}
+
+        cameraController.GetComponent<NegateTracking>().spindleScene = false;
+    }
 
 	private void states_usFlag(){
 		arrayInt = 5;
@@ -252,6 +255,9 @@ public class ExploreController : MonoBehaviour {
 
 	private void CameraSpindleLock(){
         InputTracking.disablePositionalTracking = true;
+        cameraController.GetComponent<NegateTracking>().spindleScene = true;
+        cameraController.GetComponent<NegateTracking>().enabled = true;
+
         Vector3 targetPos = cameraController.transform.position;
 		Quaternion targetRot = Quaternion.Euler(cameraController.transform.rotation.x, cameraController.transform.rotation.y - 75f, cameraController.transform.rotation.z);
 		cameraController.transform.rotation = targetRot;
