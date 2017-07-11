@@ -77,7 +77,7 @@ public class ExploreController : MonoBehaviour {
 		if (!stateLock) {
 			if (myState == States.wait) {
 				states_wait ();
-                Debug.Log("States.wait now active.");
+                //Debug.Log("States.wait now active.");
 			} else if (myState == States.frontLoading && !hasFrontLoadingPlayed) {
 				states_frontLoading ();
 				GvrReticleOff ();
@@ -104,8 +104,6 @@ public class ExploreController : MonoBehaviour {
 	#region State Methods
 
 	private void states_wait (){
-        cameraController.GetComponent<NegateTracking>().enabled = false;
-        cameraController.GetComponent<NegateTracking>().spindleScene = false;
     }
 
 	private void states_frontLoading(){
@@ -211,7 +209,7 @@ public class ExploreController : MonoBehaviour {
 		cameraController.transform.eulerAngles = targetRotation;
 	}
 
-	private IEnumerator StateResetDelay (){
+    private IEnumerator StateResetDelay (){
 		float audioLength = exploreSceneAudio.audioClip [arrayInt].length;
 		yield return new WaitForSeconds (audioLength + stateResetDelay);
 		captionsCanvas.FadeCaptionsPanelToggle (arrayInt + 2);
@@ -222,7 +220,7 @@ public class ExploreController : MonoBehaviour {
 		if (hasFrontLoadingPlayed) {
 			particleGlowTable.SetActive (true);
 		}
-	}
+    }
 
 	#endregion
 
@@ -298,7 +296,9 @@ public class ExploreController : MonoBehaviour {
 		GvrReticleOn ();
 		myState = States.wait;
 		captionsCanvas.FadeCaptionsPanelToggle (arrayInt + 3);
-	}
+        cameraController.GetComponent<NegateTracking>().spindleScene = false;
+        cameraController.GetComponent<NegateTracking>().enabled = false;
+    }
 
 	private IEnumerator HousingFadeTo (float aValue, float aTime){
 		float alpha = housingSideFade.GetComponent<Renderer>().material.color.a;

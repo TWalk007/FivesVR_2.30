@@ -33,7 +33,7 @@ public class NegateTracking : MonoBehaviour {
 
         transform.rotation = Quaternion.Inverse(InputTracking.GetLocalRotation(VRNode.CenterEye));
     
-        Quaternion targetRot = Quaternion.Euler(5f, -77f, 0f);
+        Quaternion targetRot = Quaternion.Euler(5f, -153f, 0f);
         cam.transform.rotation = targetRot;
     }
 
