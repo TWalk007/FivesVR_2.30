@@ -77,6 +77,7 @@ public class ExploreController : MonoBehaviour {
 		if (!stateLock) {
 			if (myState == States.wait) {
 				states_wait ();
+                Debug.Log("States.wait now active.");
 			} else if (myState == States.frontLoading && !hasFrontLoadingPlayed) {
 				states_frontLoading ();
 				GvrReticleOff ();
@@ -104,8 +105,7 @@ public class ExploreController : MonoBehaviour {
 
 	private void states_wait (){
         cameraController.GetComponent<NegateTracking>().enabled = false;
-        cameraController.GetComponent<Animator>().enabled = false;
-        spindleTool.GetComponent<Animator>().enabled = false;
+        cameraController.GetComponent<NegateTracking>().spindleScene = false;
     }
 
 	private void states_frontLoading(){
@@ -145,10 +145,6 @@ public class ExploreController : MonoBehaviour {
 		CreatePart ();
 		captionsCanvas.FadeCaptionsPanelToggle (arrayInt + 2);
 		StartCoroutine (SpindleAnimationDelay ());
-
-        cameraController.GetComponent<NegateTracking>().enabled = false;
-        cameraController.GetComponent<NegateTracking>().spindleScene = false;
-        
     }
 
 	private void states_usFlag(){
@@ -260,20 +256,9 @@ public class ExploreController : MonoBehaviour {
 	#region Spindle Animation Methods
 
 	private void CameraSpindleLock(){
-        cameraController.GetComponent<GvrEditorEmulator>().enabled = false;
         InputTracking.disablePositionalTracking = true;
         cameraController.GetComponent<NegateTracking>().spindleScene = true;
         cameraController.GetComponent<NegateTracking>().enabled = true;
-
-        cameraController.GetComponent<GvrEditorEmulator>().enabled = false;
-
-
-        Vector3 cameraStartingPos = camera.transform.position;
-        camera.GetComponent<Animator>().enabled = true;
-
-
-        Quaternion targetRot = Quaternion.Euler(5f, -77f, camera.transform.rotation.z);
-		camera.transform.rotation = targetRot;
 	}
 
 	private IEnumerator SpindleAnimationDelay(){
@@ -333,11 +318,11 @@ public class ExploreController : MonoBehaviour {
 
 	private void SpindleSequenceMoveIn (){
 		Vector3 position = spindleSequenceCamPos.position;
-		iTween.MoveTo (gvrController, iTween.Hash("position", position, "easeType", "easeInOutQuad", "time", moveSpeed));
+		iTween.MoveTo (cameraController, iTween.Hash("position", position, "easeType", "easeInOutQuad", "time", moveSpeed));
 	}
 
 	private void SpindleSequenceMoveOut (){
-		iTween.MoveTo (gvrController, iTween.Hash("position", spindleCamStartPos, "easeType", "easeInOutQuad", "time", moveSpeed));
+		iTween.MoveTo (cameraController, iTween.Hash("position", spindleCamStartPos, "easeType", "easeInOutQuad", "time", moveSpeed));
 	}
 
 	#endregion

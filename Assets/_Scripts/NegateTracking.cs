@@ -3,15 +3,22 @@ using UnityEngine.VR;
 
 public class NegateTracking : MonoBehaviour {
 
+    public GameObject cameraObject;
     public Transform hotSpotSpindleTransform;
     public Transform hotSpotoperatorTransform;
 
     public bool spindleScene = false;
     public bool operatorScene = false;
 
+    private Camera cam;
     private Vector3 currentPos;
-    
-	void Update () {
+
+    private void Start()
+    {
+        cam = cameraObject.GetComponent<Camera>();
+    }
+
+    void Update () {
 
         //if (spindleScene)
         //{
@@ -25,6 +32,9 @@ public class NegateTracking : MonoBehaviour {
 
 
         transform.rotation = Quaternion.Inverse(InputTracking.GetLocalRotation(VRNode.CenterEye));
+    
+        Quaternion targetRot = Quaternion.Euler(5f, -77f, 0f);
+        cam.transform.rotation = targetRot;
     }
 
     //public void InvertCamPos(Transform trans)
