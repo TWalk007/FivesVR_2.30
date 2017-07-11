@@ -32,6 +32,7 @@ public class ExploreController : MonoBehaviour {
 	public GameObject cuttingTableGObject;
 	public GameObject operatorHotspot;
 	public GameObject particleGlowTable;
+    public GameObject camera;
 
 	public Transform operatorSequenceCamPos;
 	public Transform spindleSequenceCamPos;
@@ -102,7 +103,10 @@ public class ExploreController : MonoBehaviour {
 	#region State Methods
 
 	private void states_wait (){
-}
+        cameraController.GetComponent<NegateTracking>().enabled = false;
+        cameraController.GetComponent<Animator>().enabled = false;
+        spindleTool.GetComponent<Animator>().enabled = false;
+    }
 
 	private void states_frontLoading(){
 		arrayInt = 0;
@@ -142,8 +146,9 @@ public class ExploreController : MonoBehaviour {
 		captionsCanvas.FadeCaptionsPanelToggle (arrayInt + 2);
 		StartCoroutine (SpindleAnimationDelay ());
 
+        cameraController.GetComponent<NegateTracking>().enabled = false;
         cameraController.GetComponent<NegateTracking>().spindleScene = false;
-        cameraController.GetComponent<NegateTracking>().spindleScene = false;
+        
     }
 
 	private void states_usFlag(){
@@ -205,6 +210,7 @@ public class ExploreController : MonoBehaviour {
 
 	private void CameraLock (Vector3 targetRotation){
         InputTracking.disablePositionalTracking = true;
+        cameraController.GetComponent<NegateTracking>().enabled = true;
         startRotation = targetRotation;
 		cameraController.transform.eulerAngles = targetRotation;
 	}
@@ -254,19 +260,27 @@ public class ExploreController : MonoBehaviour {
 	#region Spindle Animation Methods
 
 	private void CameraSpindleLock(){
+        cameraController.GetComponent<GvrEditorEmulator>().enabled = false;
         InputTracking.disablePositionalTracking = true;
         cameraController.GetComponent<NegateTracking>().spindleScene = true;
         cameraController.GetComponent<NegateTracking>().enabled = true;
 
-        Vector3 targetPos = cameraController.transform.position;
-		Quaternion targetRot = Quaternion.Euler(cameraController.transform.rotation.x, cameraController.transform.rotation.y - 75f, cameraController.transform.rotation.z);
-		cameraController.transform.rotation = targetRot;
+        cameraController.GetComponent<GvrEditorEmulator>().enabled = false;
+
+
+        Vector3 cameraStartingPos = camera.transform.position;
+        camera.GetComponent<Animator>().enabled = true;
+
+
+        Quaternion targetRot = Quaternion.Euler(5f, -77f, camera.transform.rotation.z);
+		camera.transform.rotation = targetRot;
 	}
 
 	private IEnumerator SpindleAnimationDelay(){
 		yield return new WaitForSeconds (2.25f);
 		spindleTool.GetComponent<Animator> ().enabled = true;
-		exploreSceneAudio.selectedClip = exploreSceneAudio.audioClip[2];
+
+        exploreSceneAudio.selectedClip = exploreSceneAudio.audioClip[2];
 	}
 
 	void StartNextAudio (){
