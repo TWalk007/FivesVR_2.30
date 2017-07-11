@@ -13,25 +13,25 @@ public class NegateTracking : MonoBehaviour {
     
 	void Update () {
 
-        if (spindleScene)
-        {
-            InvertCamPos(hotSpotSpindleTransform);
-        }
+        //if (spindleScene)
+        //{
+        //    InvertCamPos(hotSpotSpindleTransform);
+        //}
 
-        if (operatorScene)
-        {
-            InvertCamPos(hotSpotoperatorTransform);
-        }
+        //if (operatorScene)
+        //{
+        //    InvertCamPos(hotSpotoperatorTransform);
+        //}
 
 
         transform.rotation = Quaternion.Inverse(InputTracking.GetLocalRotation(VRNode.CenterEye));
     }
 
-    public void InvertCamPos(Transform trans)
-    {
-        currentPos = -InputTracking.GetLocalPosition(VRNode.CenterEye);
-        transform.position = new Vector3 (trans.position.x, trans.position.y + 2.25f, trans.position.z);
-    }
+    //public void InvertCamPos(Transform trans)
+    //{
+    //    currentPos = -InputTracking.GetLocalPosition(VRNode.CenterEye);
+    //    transform.position = new Vector3 (trans.position.x, trans.position.y + 2.25f, trans.position.z);
+    //}
 
 
 }

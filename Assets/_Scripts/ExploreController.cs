@@ -143,6 +143,7 @@ public class ExploreController : MonoBehaviour {
 		StartCoroutine (SpindleAnimationDelay ());
 
         cameraController.GetComponent<NegateTracking>().spindleScene = false;
+        cameraController.GetComponent<NegateTracking>().spindleScene = false;
     }
 
 	private void states_usFlag(){
@@ -180,7 +181,6 @@ public class ExploreController : MonoBehaviour {
 	#region Explore Controller Global Methods
 
 	private void RecenterScene(float targetY, GameObject targetObject, float angleAdjustment){
-		//float camYAngle = cameraController.transform.rotation.eulerAngles.y;
 
 		scene.transform.rotation = Quaternion.Euler (scene.transform.rotation.x, scene.transform.rotation.y + angleAdjustment, scene.transform.rotation.z);
 		Vector3 scenePosition = scene.transform.position;
