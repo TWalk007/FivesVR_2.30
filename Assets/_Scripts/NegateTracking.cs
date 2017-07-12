@@ -5,7 +5,7 @@ public class NegateTracking : MonoBehaviour {
 
     public GameObject cameraObject;
     public Transform hotSpotSpindleTransform;
-    public Transform hotSpotoperatorTransform;
+    public Transform hotSpotOperatorTransform;
 
     public bool spindleScene = false;
     public bool operatorScene = false;
@@ -19,29 +19,22 @@ public class NegateTracking : MonoBehaviour {
     }
 
     void Update () {
-
-        //if (spindleScene)
-        //{
-        //    InvertCamPos(hotSpotSpindleTransform);
-        //}
-
-        //if (operatorScene)
-        //{
-        //    InvertCamPos(hotSpotoperatorTransform);
-        //}
-
-
+        
         transform.rotation = Quaternion.Inverse(InputTracking.GetLocalRotation(VRNode.CenterEye));
-    
-        Quaternion targetRot = Quaternion.Euler(5f, -153f, 0f);
-        cam.transform.rotation = targetRot;
+
+        if (spindleScene)
+        {
+            Quaternion targetRot = Quaternion.Euler(5f, -77f, 0f);
+            cam.transform.rotation = targetRot;
+        }
+
+        if (operatorScene)
+        {
+            Quaternion targetRot = Quaternion.Euler(5f, -150f, 0f);
+            cam.transform.rotation = targetRot;
+        }
+
+
     }
-
-    //public void InvertCamPos(Transform trans)
-    //{
-    //    currentPos = -InputTracking.GetLocalPosition(VRNode.CenterEye);
-    //    transform.position = new Vector3 (trans.position.x, trans.position.y + 2.25f, trans.position.z);
-    //}
-
 
 }

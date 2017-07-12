@@ -4,15 +4,13 @@ using UnityEngine;
 using UnityEngine.VR;
 using GVR;
 
-public class ExploreController : MonoBehaviour {
+public class ExploreControllerTouch : MonoBehaviour {
 
 	//  Use this script as the main controller of events that take place in the 'Explore RT130 Scene'.
 	#region Initial Declarations
 
 	public ExploreSceneAudio exploreSceneAudio;
 	public MovieCanvasController movieCanvasController;
-	public GvrReticlePointer gvrReticlePointer;
-	public GvrEditorEmulator gvrViewerGvrEditorEmulator;
 	public SpindleExtensionTriggers spindleExtensionTriggers;
 
 	public CuttingTable cuttingTable;
@@ -21,7 +19,7 @@ public class ExploreController : MonoBehaviour {
 
 	public CaptionsCanvas captionsCanvas;
 	public GameObject scene;
-	public GameObject gvrController;
+	public GameObject touchCameraController;
 	public GameObject cameraController;
 	public GameObject operatorDoor;
 	public GameObject housingSide;
@@ -32,7 +30,7 @@ public class ExploreController : MonoBehaviour {
 	public GameObject cuttingTableGObject;
 	public GameObject operatorHotspot;
 	public GameObject particleGlowTable;
-    public GameObject camera;
+    public GameObject mainCamera;
 
 	public Transform operatorSequenceCamPos;
 	public Transform spindleSequenceCamPos;
@@ -80,22 +78,16 @@ public class ExploreController : MonoBehaviour {
                 //Debug.Log("States.wait now active.");
 			} else if (myState == States.frontLoading && !hasFrontLoadingPlayed) {
 				states_frontLoading ();
-				GvrReticleOff ();
 			} else if (myState == States.cuttingTable && hasFrontLoadingPlayed) {
 				states_cuttingTable ();
-				GvrReticleOff ();
 			} else if (myState == States.spindleMovement) {
 				states_spindleMovement ();
-				GvrReticleOff ();
 			} else if (myState == States.usFlag) {
 				states_usFlag ();
-				GvrReticleOff ();
 			} else if (myState == States.toolChanger) {
 				states_toolChanger ();
-				GvrReticleOff ();
 			} else if (myState == States.controls) {
 				states_controls ();
-				GvrReticleOff ();
 			}
 		}
 	}
@@ -131,7 +123,6 @@ public class ExploreController : MonoBehaviour {
 	private void states_spindleMovement(){
 		arrayInt = 2;
 		stateLock = true;
-		CameraSpindleLock ();
 
 		spindleCamStartPos = cameraController.transform.position;
 		movieCanvasController.InitializeCanvas ();
@@ -155,10 +146,6 @@ public class ExploreController : MonoBehaviour {
 	private void states_controls(){
 		arrayInt = 4;
 		stateLock = true;
-
-        InputTracking.disablePositionalTracking = true;
-        cameraController.GetComponent<NegateTracking>().operatorScene = true;
-        cameraController.GetComponent<NegateTracking>().enabled = true;
 
         operatorCamStartPos = cameraController.transform.position;
 		OperatorMoveIn ();
@@ -184,7 +171,6 @@ public class ExploreController : MonoBehaviour {
 	#region Explore Controller Global Methods
 
 	private void RecenterScene(float targetY, GameObject targetObject, float angleAdjustment){
-
 		scene.transform.rotation = Quaternion.Euler (scene.transform.rotation.x, scene.transform.rotation.y + angleAdjustment, scene.transform.rotation.z);
 		Vector3 scenePosition = scene.transform.position;
 		scenePosition.x = scene.transform.position.x - 5.5f;
@@ -195,20 +181,7 @@ public class ExploreController : MonoBehaviour {
 		cameraController.transform.position = newPosition;
 	}
 
-	private void GvrReticleOn(){
-		gvrReticlePointer.GetComponent<MeshRenderer> ().enabled = true;
-		gvrReticlePointer.enabled = true;
-        InputTracking.disablePositionalTracking = true;
-	}
-
-	private void GvrReticleOff(){
-		gvrReticlePointer.GetComponent<MeshRenderer> ().enabled = false;
-		gvrReticlePointer.enabled = false;
-	}
-
 	private void CameraLock (Vector3 targetRotation){
-        InputTracking.disablePositionalTracking = true;
-        cameraController.GetComponent<NegateTracking>().enabled = true;
         startRotation = targetRotation;
 		cameraController.transform.eulerAngles = targetRotation;
 	}
@@ -220,7 +193,6 @@ public class ExploreController : MonoBehaviour {
 		yield return new WaitForSeconds (2);
 		stateLock = false;
 		myState = States.wait;
-		GvrReticleOn ();
 		if (hasFrontLoadingPlayed) {
 			particleGlowTable.SetActive (true);
 		}
@@ -233,7 +205,6 @@ public class ExploreController : MonoBehaviour {
 		yield return new WaitForSeconds (stateResetDelay + 3.5f);
 		captionsCanvas.FadeCaptionsPanelToggle (arrayInt + 2);
 		yield return new WaitForSeconds (2);
-		GvrReticleOn ();
 		myState = States.wait;
 		stateLock = false;
 	}
@@ -257,16 +228,9 @@ public class ExploreController : MonoBehaviour {
 
 	#region Spindle Animation Methods
 
-	private void CameraSpindleLock(){
-        InputTracking.disablePositionalTracking = true;
-        cameraController.GetComponent<NegateTracking>().spindleScene = true;
-        cameraController.GetComponent<NegateTracking>().enabled = true;
-	}
-
 	private IEnumerator SpindleAnimationDelay(){
 		yield return new WaitForSeconds (2.25f);
 		spindleTool.GetComponent<Animator> ().enabled = true;
-
         exploreSceneAudio.selectedClip = exploreSceneAudio.audioClip[2];
 	}
 
@@ -293,15 +257,11 @@ public class ExploreController : MonoBehaviour {
 		newTablePart.SetActive (false);
 		housingSide.SetActive (true);
 		housingSideFade.SetActive (false);
-        InputTracking.disablePositionalTracking = false;
         spindleTool.GetComponent<Animator> ().enabled = false;
 		stateLock = false;
 		spindleExtensionTriggers.audioHasPlayed = false;
-		GvrReticleOn ();
 		myState = States.wait;
 		captionsCanvas.FadeCaptionsPanelToggle (arrayInt + 3);
-        cameraController.GetComponent<NegateTracking>().spindleScene = false;
-        cameraController.GetComponent<NegateTracking>().enabled = false;
     }
 
 	private IEnumerator HousingFadeTo (float aValue, float aTime){
@@ -370,7 +330,6 @@ public class ExploreController : MonoBehaviour {
 		CameraOperatorUnlock ();
 		CameraLock(operatorCamStartRotation);
 		stateLock = false;
-		GvrReticleOn ();
 		captionsCanvas.FadeCaptionsPanelToggle (arrayInt + 2);
 		myState = States.wait;
 	}
@@ -381,9 +340,6 @@ public class ExploreController : MonoBehaviour {
 
 	private IEnumerator CameraOperatorUnlockTimer(){
 		yield return new WaitForSeconds (3.0f);
-        InputTracking.disablePositionalTracking = false;
-        cameraController.GetComponent<NegateTracking>().spindleScene = false;
-        cameraController.GetComponent<NegateTracking>().enabled = false;
 
         //Turning this method call off as I will need custom rotation numbers for every hotspot (viewing angle)
         //you could click on the operator hotspot from. THEN, I would need to do the same thing with all new numbers for

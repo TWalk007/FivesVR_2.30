@@ -13,7 +13,7 @@ public class LoadingBar_TouchExp : MonoBehaviour {
 	void Start()
 	{
 		//Loading the scene of your choosing
-		Load = SceneManager.LoadSceneAsync("02_VR Explore RT130");
+		Load = SceneManager.LoadSceneAsync("03_Touch Explore RT130");
 
 		//Delaying Scene Activation for a fraction of a second to allow "100%" to be displayed at the end.
 		Load.allowSceneActivation = false;
