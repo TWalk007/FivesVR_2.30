@@ -28,6 +28,10 @@ public class LevelManager : MonoBehaviour {
 		SceneManager.LoadScene (name);
 	}
 
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("01_Main");
+    }
 
 	public void ResetScene (){
 		int currentIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;

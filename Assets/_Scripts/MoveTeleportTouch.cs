@@ -10,6 +10,8 @@ public class MoveTeleportTouch : MonoBehaviour {
 	public GameObject teleportFadePanel;
 	public GameObject touchCameraController;
 
+    public Transform gazeDirection;
+
     private Vector3 heightAdjustedPos;
 
     void Start () {
@@ -20,7 +22,8 @@ public class MoveTeleportTouch : MonoBehaviour {
         touchCameraController.transform.position = heightAdjustedPos;
 		TeleportTransition ();
 		teleportFadePanel.GetComponent<TeleportTransition> ().TeleportingFalse ();
-	}
+        Camera.main.transform.LookAt(gazeDirection);
+    }
 
     private void TeleportTransition()
     {
@@ -42,4 +45,5 @@ public class MoveTeleportTouch : MonoBehaviour {
     {
         Teleport();
     }
+    
 }
